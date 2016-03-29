@@ -1,0 +1,6 @@
+- name: Clone atomicapp
+  git: repo=https://github.com/projectatomic/atomicapp dest=atomicapp
+
+- name: Install atomicapp
+  sudo: yes
+  command: chdir=atomicapp make install

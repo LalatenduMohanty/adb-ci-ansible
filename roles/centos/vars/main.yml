@@ -1,0 +1,5 @@
+---
+
+clone_adb_repo: false
+pull_adb_libvirt_box: true
+adb_tests_dharmit: false

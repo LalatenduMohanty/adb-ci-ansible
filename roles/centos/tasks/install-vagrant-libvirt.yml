@@ -1,0 +1,23 @@
+- name: Enable centos-release-scl repo
+  yum: name=centos-release-scl state=latest
+
+- name: Setup libvirt + Vagrant
+  tags: libvirt
+  yum: name={{item}} state=latest
+  with_items:
+      - sclo-vagrant1
+      - qemu-kvm
+  notify: start-enable-libvirtd
+
+- name: Install Vagrant Service Manager
+  shell: scl enable sclo-vagrant1 'bash -c "vagrant plugin install vagrant-service-manager"'
+
+- include: ../../common/tasks/clone-adb-repo.yml
+  when: clone_adb_repo
+
+- include: ../../common/tasks/clone-adb-tests-dharmit.yml
+  when: adb_tests_dharmit
+
+- name: Pull Vagrant box
+  shell: scl enable sclo-vagrant1 'bash -c "vagrant box add projectatomic/adb --provider=libvirt"'
+  when: pull_adb_libvirt_box

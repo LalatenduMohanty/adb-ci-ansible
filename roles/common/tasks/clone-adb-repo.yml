@@ -1,0 +1,2 @@
+- name: Clone ADB Atomic Developer Bundler
+  git: repo=https://github.com/projectatomic/adb-atomic-developer-bundle dest=~/adb
