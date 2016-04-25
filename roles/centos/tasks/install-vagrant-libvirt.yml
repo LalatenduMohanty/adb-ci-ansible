@@ -15,8 +15,8 @@
 - include: ../../common/tasks/clone-adb-repo.yml
   when: clone_adb_repo
 
-- include: ../../common/tasks/clone-adb-tests-dharmit.yml
-  when: adb_tests_dharmit
+- include: ../../common/tasks/clone-adb-tests.yml
+  when: adb_tests
 
 - name: Pull Vagrant box
   shell: scl enable sclo-vagrant1 'bash -c "vagrant box add projectatomic/adb --provider=libvirt"'

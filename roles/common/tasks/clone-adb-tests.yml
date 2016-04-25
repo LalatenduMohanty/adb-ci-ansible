@@ -1,0 +1,2 @@
+- name: Clone ADB Tests
+  git: repo=https://github.com/projectatomic/adb-tests dest=~/adb-tests

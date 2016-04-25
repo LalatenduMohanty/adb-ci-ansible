@@ -1,2 +1,0 @@
-- name: Clone ADB Tests (dharmit's repo)
-  git: repo=https://github.com/dharmit/adb-tests dest=~/adb-tests-dharmit
