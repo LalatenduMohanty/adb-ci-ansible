@@ -1,4 +1,0 @@
----
-- name: start-enable-libvirtd
-  service: name=libvirtd state=started enabled=yes
-

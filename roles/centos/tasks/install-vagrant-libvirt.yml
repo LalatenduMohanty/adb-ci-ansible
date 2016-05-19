@@ -9,7 +9,9 @@
       - qemu-kvm
       - sclo-vagrant1-vagrant-libvirt
       - rsync
-  notify: start-enable-libvirtd
+
+- name: start-enable-libvirtd
+  service: name=libvirtd state=started enabled=yes
 
 - name: Devel packages for VSM
   yum: name={{item}} state=latest
@@ -17,8 +19,10 @@
       - zlib-devel 
       - ruby-devel 
       - rh-ruby22-ruby-devel
-      - "@Development tools"
       - libvirt-devel
+
+- name: Install Development Tools
+  yum: name="@Development tools" state=present
 
 - name: Install Vagrant Service Manager
   shell: scl enable sclo-vagrant1 'bash -c "vagrant plugin install vagrant-service-manager"'
