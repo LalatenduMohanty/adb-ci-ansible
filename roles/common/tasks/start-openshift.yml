@@ -1,0 +1,8 @@
+- name: Pull Vagrantfile
+  get_url: url=https://github.com/projectatomic/adb-atomic-developer-bundle/raw/master/components/centos/centos-openshift-setup/Vagrantfile dest=/root
+  # shell: cd && scl enable sclo-vagrant1 'bash -c "vagrant init projectatomic/adb && vagrant up"'
+
+- name: Start ADB
+  shell: cd && scl enable sclo-vagrant1 'bash -c "vagrant up"'
+  # - name: sccli start openshift
+  #   shell: cd && scl enable sclo-vagrant1 'bash -c "vagrant ssh -c \'sccli openshift\'"'

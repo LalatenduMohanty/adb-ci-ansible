@@ -1,0 +1,5 @@
+---
+
+start-openshift: false
+openshift_vagrantfile: https://github.com/projectatomic/adb-atomic-developer-bundle/raw/master/components/centos/centos-openshift-setup/Vagrantfile
+pull_location: /root 

@@ -1,1 +1,3 @@
 - include: install-vagrant-libvirt.yml
+- include: ../../common/tasks/start-openshift.yml
+  when: start-openshift

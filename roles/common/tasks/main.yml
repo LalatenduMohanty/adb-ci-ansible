@@ -1,2 +1,1 @@
-- tasks:
-  - include: install-atomicapp
+- include: install-atomicapp
