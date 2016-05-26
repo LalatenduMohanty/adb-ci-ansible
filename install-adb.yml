@@ -1,4 +1,4 @@
-- hosts: localhost
-  connection: local
+- hosts: duffy
+  remote_user: root
   roles:
       - { role: centos,  when: ansible_distribution == "CentOS" }
