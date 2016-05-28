@@ -35,4 +35,5 @@
 
 - name: Pull Vagrant box
   shell: scl enable sclo-vagrant1 'bash -c "vagrant box add projectatomic/adb --provider=libvirt"'
+  ignore_errors: true
   when: pull_adb_libvirt_box
