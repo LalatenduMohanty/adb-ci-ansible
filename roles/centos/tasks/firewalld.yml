@@ -1,0 +1,6 @@
+- name: Open Firewall Ports for OpenShift
+  firewalld: port={{ item }}/tcp permanent=yes state=enabled immediate=yes zone=public
+  with_items:
+    - "443"
+    - "8443"
+    - "80"

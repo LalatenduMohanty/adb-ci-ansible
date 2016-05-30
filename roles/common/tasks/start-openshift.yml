@@ -1,6 +1,39 @@
+- stat: path=/root/Vagrantfile
+  register: vagrantfile_exists
+
 - name: Pull Vagrantfile
   get_url: url=https://github.com/projectatomic/adb-atomic-developer-bundle/raw/master/components/centos/centos-openshift-setup/Vagrantfile dest=/root
+  when: vagrantfile_exists.stat.exists == False
   # shell: cd && scl enable sclo-vagrant1 'bash -c "vagrant init projectatomic/adb && vagrant up"'
+
+- name: Set Vagrantfile Host variable
+  lineinfile:
+    dest: '/root/Vagrantfile'
+    state: present
+    insertafter: 'config\.vm\.box'
+    line: '  host_ip = Socket::getaddrinfo(Socket.gethostname,"echo",Socket::AF_INET)[0][3]'
+    regexp: '^  host_ip =*'
+
+- name: Set Vagrantfile Forwarded Ports
+  lineinfile:
+    dest: '/root/Vagrantfile'
+    state: present
+    insertafter: "{{ item.after }}"
+    line: "{{ item.line }}"
+    regexp: "{{ item.regexp }}"
+  with_items:
+    - { after: '  config.vm.network "private_network", ip: "#{PUBLIC_ADDRESS}"', line: '  config.vm.network "forwarded_port", guest: 8443, host: 8443, gateway_ports: true, host_ip: "*"', regexp: '  config.vm.network "forwarded_port", guest: 8443, host: 8443, gateway_ports: true, host_ip: "*"' }
+    - { after: '  config.vm.network "forwarded_port", guest: 8443, host: 8443, gateway_ports: true, host_ip: "*"', line: '  config.vm.network "forwarded_port", guest: 80, host: 80, gateway_ports: true, host_ip: "*"', regexp: '  config.vm.network "forwarded_port", guest: 80, host: 80, gateway_ports: true, host_ip: "*"' }
+    - { after: '  config.vm.network "forwarded_port", guest: 80, host: 80, gateway_ports: true, host_ip: "*"', line: '  config.vm.network "forwarded_port", guest: 443, host: 443, gateway_ports: true, host_ip: "*"', regexp: '  config.vm.network "forwarded_port", guest: 443, host: 443, gateway_ports: true, host_ip: "*"' }
+
+- name: Update OSE Subdomain in Vagrantfile
+  lineinfile:
+    dest: '/root/Vagrantfile'
+    state: present
+    insertbefore: '    sudo DOCKER_REGISTRY-*'
+    line: "    sudo sed -i 's/OPENSHIFT_SUBDOMAIN=.*/OPENSHIFT_SUBDOMAIN=\"apps.#{host_ip}.xip.io\"/g' /etc/sysconfig/openshift_option"
+    regexp: "    sudo sed -i 's/OPENSHIFT_SUBDOMAIN=.*/OPENSHIFT_SUBDOMAIN=\"apps.#{host_ip}.xip.io\"/g' /etc/sysconfig/openshift_option"
+
 
 - name: Start ADB
   shell: cd && scl enable sclo-vagrant1 'bash -c "vagrant up"'
