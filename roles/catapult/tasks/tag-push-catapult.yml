@@ -1,0 +1,15 @@
+- name: Set Destination Fact
+  set_fact:
+    destination_location: "{{destination_repository}}/{{destination_image}}:{{destination_tag}}"
+
+- name: Destination Registry Login
+  shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'docker login -u {{destination_user}} -p {{destination_password}} -e {{destination_email}}'\""
+
+- name: Fix Docker Bug
+  shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'sed -i \\\"s|\\\"docker.io\\\"|\\\"https://index\.docker\.io/v1/\\\"|g\\\" /home/vagrant/.docker/config.json'\""
+
+- name: Tag Image
+  shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'docker tag -f {{ose_registry}}:5000/distortion/catapult {{destination_location}}'\""
+
+- name: Push Image
+  shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'docker push -f {{destination_location}}'\""

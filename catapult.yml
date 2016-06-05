@@ -1,0 +1,9 @@
+- hosts: localhost
+  roles:
+      - { role: catapult,  when: ansible_distribution == "CentOS" }
+
+- hosts: duffy
+  remote_user: root
+  roles:
+    - { role: catapult, ose_registry: '{{hostvars.localhost.ose_registry}}',  when: ansible_distribution == "CentOS" }
+
