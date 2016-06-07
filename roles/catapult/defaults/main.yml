@@ -1,0 +1,6 @@
+---
+oc_bianry: /home/kontinuity/oc/oc
+destination_repository: sabre1041
+destination_image: catapult
+destination_tag: latest
+destination_email: andy.block@gmail.com
