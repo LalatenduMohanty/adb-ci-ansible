@@ -1,5 +1,7 @@
 ---
 oc_bianry: /home/kontinuity/oc/oc
+git_source_repository: https://github.com/redhat-kontinuity/catapult
+git_source_ref: master
 destination_repository: sabre1041
 destination_image: catapult
 destination_tag: latest
