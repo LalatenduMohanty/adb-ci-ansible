@@ -1,5 +1,5 @@
 - name: Execute Catapult Init Script
-  script: init_catapult.sh -b={{ oc_binary }} -h={{ ose_host }} --github-client-id={{ github_client_id }} --github-client-secret={{ github_client_secret }} --git-repository={{ git_source_repository }} --git-ref={{ git_source_ref }}
+  script: init_catapult.sh -b={{ oc_binary }} -h={{ ose_host }} --github-client-id={{ github_client_id }} --github-client-secret={{ github_client_secret }} --base-image={{ base_image }} --git-repository={{ git_source_repository }} --git-ref={{ git_source_ref }}
   register: catapult_init_script
 
 - name: Debug Output

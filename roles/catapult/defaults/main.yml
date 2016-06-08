@@ -1,4 +1,5 @@
 ---
+base_image: openshift/wildfly-100-centos7
 oc_bianry: /home/kontinuity/oc/oc
 git_source_repository: https://github.com/redhat-kontinuity/catapult
 git_source_ref: master

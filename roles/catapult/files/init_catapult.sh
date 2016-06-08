@@ -29,8 +29,11 @@ do
     -p=*|--password=*)
       PASSWORD="${i#*=}"
       shift;;
-     -b=*|--binary=*)
+    -b=*|--binary=*)
       OC_BINARY="${i#*=}"
+      shift;;
+    --base-image=*)
+      BASE_IMAGE="${i#*=}"
       shift;;      
     --github-client-id=*)
       KONTINUITY_CATAPULT_GITHUB_APP_CLIENT_ID="${i#*=}"
