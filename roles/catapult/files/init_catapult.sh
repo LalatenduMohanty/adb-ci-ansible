@@ -150,7 +150,7 @@ echo -n "Validating Application"
 while [ $COUNTER -lt $MAX_COUNTER ]
 do
     
-    RESPONSE=$(curl -s -o /dev/null -w '%{http_code}\n' http://${APP_HOSTNAME}/kontinuity-catapult/api/github/verify)
+    RESPONSE=$(curl -s -o /dev/null -w '%{http_code}\n' http://${APP_HOSTNAME}/api/github/verify)
     
     if [ $RESPONSE -eq 200 ]; then
         echo 
