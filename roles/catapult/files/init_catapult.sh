@@ -94,6 +94,7 @@ sleep 5
 
 # Track Build
 echo
+sleep 10
 echo "Waiting for first build to begin..."
 echo
 wait_for_running_first_build "${APP_NAME}" "${PROJECT}"
