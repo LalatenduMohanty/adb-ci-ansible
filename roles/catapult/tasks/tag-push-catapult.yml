@@ -2,8 +2,8 @@
   set_fact:
     destination_location: "{{destination_repository}}/{{destination_image}}:{{destination_tag}}"
 
-- name: Destination Registry Login
-  shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'docker login -u {{destination_user}} -p {{destination_password}} -e {{destination_email}}'\""
+- name: Docker Login
+  shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'docker login -u {{docker_user}} -p {{docker_password}} -e {{docker_email}}'\""
 
 - name: Fix Docker Bug
   shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'sed -i \\\"s|\\\"docker.io\\\"|\\\"https://index\.docker\.io/v1/\\\"|g\\\" /home/vagrant/.docker/config.json'\""
