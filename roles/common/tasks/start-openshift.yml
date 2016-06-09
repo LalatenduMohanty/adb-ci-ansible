@@ -6,11 +6,11 @@
   when: vagrantfile_exists.stat.exists == False
   # shell: cd && scl enable sclo-vagrant1 'bash -c "vagrant init projectatomic/adb && vagrant up"'
 
-- name: Set Image Tag
-  lineinfile:
-    dest: '/root/Vagrantfile'
-    line: 'IMAGE_TAG="latest"'
-    regexp: '^IMAGE_TAG'
+#- name: Set Image Tag
+#  lineinfile:
+#    dest: '/root/Vagrantfile'
+#    line: 'IMAGE_TAG="latest"'
+#    regexp: '^IMAGE_TAG'
 
 - name: Set Vagrantfile Host variable
   lineinfile:
