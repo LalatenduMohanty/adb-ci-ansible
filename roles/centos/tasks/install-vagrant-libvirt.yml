@@ -25,7 +25,7 @@
   yum: name="@Development tools" state=present
 
 - name: Install Vagrant Service Manager
-  shell: scl enable sclo-vagrant1 'bash -c "vagrant plugin install vagrant-service-manager"'
+  shell: scl enable sclo-vagrant1 'bash -c "vagrant plugin install vagrant-service-manager vagrant-sshfs"'
 
 - include: ../../common/tasks/clone-adb-repo.yml
   when: clone_adb_repo
