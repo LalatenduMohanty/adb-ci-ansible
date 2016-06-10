@@ -5,8 +5,8 @@
 - name: Docker Login
   shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'docker login -u {{docker_user}} -p {{docker_password}} -e {{docker_email}}'\""
 
-- name: Fix Docker Bug
-  shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'sed -i \\\"s|\\\"docker.io\\\"|\\\"https://index\.docker\.io/v1/\\\"|g\\\" /home/vagrant/.docker/config.json'\""
+  # - name: Fix Docker Bug
+  #   shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'sed -i \\\"s|\\\"docker.io\\\"|\\\"https://index\.docker\.io/v1/\\\"|g\\\" /home/vagrant/.docker/config.json'\""
 
 - name: Tag Image
   shell: cd && scl enable sclo-vagrant1 "bash -c \"vagrant ssh -c 'docker tag -f {{ose_registry}}:5000/distortion/catapult {{destination_location}}'\""
