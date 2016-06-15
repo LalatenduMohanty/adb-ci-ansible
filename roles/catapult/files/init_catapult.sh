@@ -2,8 +2,8 @@
 
 set -e
 
-CATAPULT_GIT_URI="https://github.com/redhat-kontinuity/catapult"
-CATAPULT_GIT_REF="master"
+CATAPULT_DIR="catapult"
+# CATAPULT_GIT_REF="master"
 BASE_IMAGE="openshift/wildfly-100-centos7"
 OC_BINARY="/home/atomic-sig/oc"
 APP_NAME="catapult"
@@ -42,11 +42,8 @@ do
       KONTINUITY_CATAPULT_GITHUB_APP_CLIENT_SECRET="${i#*=}"
       shift;;
     --git-repository=*)
-      CATAPULT_GIT_URI="${i#*=}"
+      CATAPULT_DIR="${i#*=}"
       shift;;
-   --git-ref=*)
-      CATAPULT_GIT_REF="${i#*=}"
-      shift;; 
   esac
 done
 
@@ -81,7 +78,7 @@ ${OC_BINARY} new-project ${PROJECT}
 
 
 # Create New Application
-${OC_BINARY} new-app ${BASE_IMAGE}~${CATAPULT_GIT_URI}#${CATAPULT_GIT_REF} --name=${APP_NAME}
+${OC_BINARY} new-app ${BASE_IMAGE}~${CATAPULT_DIR} --name=${APP_NAME}
 
 # Import Image Streams
 ${OC_BINARY} import-image ${BASE_IMAGE##*/}
